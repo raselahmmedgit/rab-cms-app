@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using CMS.App.Models;
-using CMS.App.Models.ViewModels;
+using CMS.App.ViewModels;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 
@@ -13,10 +13,10 @@ namespace CMS.App.Controllers
     public class AdminController : Controller
     {
         private RoleManager<IdentityRole> roleManager;
-        private UserManager<AppUser> userManager;
-        private SignInManager<AppUser> signInManager;
+        private UserManager<AspNetUser> userManager;
+        private SignInManager<AspNetUser> signInManager;
 
-        public AdminController(RoleManager<IdentityRole> roleMgr, UserManager<AppUser> userMrg, SignInManager<AppUser> signMgr)
+        public AdminController(RoleManager<IdentityRole> roleMgr, UserManager<AspNetUser> userMrg, SignInManager<AspNetUser> signMgr)
         {
             roleManager = roleMgr;
             userManager = userMrg;

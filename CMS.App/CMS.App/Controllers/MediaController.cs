@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using CMS.App.Models;
-using CMS.App.Models.ViewModels;
+using CMS.App.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Web;
 using Microsoft.AspNetCore.Http;
@@ -181,7 +181,7 @@ namespace CMS.App.Controllers
                                         Direction = System.Data.ParameterDirection.Output,
                                         Size = 50
                                     }};
-                using (var context = new CMSContext())
+                using (var context = new AppDbContext())
                 {
                     context.Database.ExecuteSqlRaw("[dbo].[sp_UpdateMedia] @Id, @Name, @Url, @Title, @Alt, @Description, @Result out", param);
                 }
@@ -193,7 +193,7 @@ namespace CMS.App.Controllers
 
         public string DeleteMedia(string ids, string paths)
         {
-            using (var context = new CMSContext())
+            using (var context = new AppDbContext())
             {
                 var param = new SqlParameter[] {
                                     new SqlParameter() {
@@ -214,7 +214,7 @@ namespace CMS.App.Controllers
         {
             List<SelectListItem> mediaDateList = new List<SelectListItem>();
             List<MediaDate> mdList = new List<MediaDate>();
-            var context = new CMSContext();
+            var context = new AppDbContext();
             using (var cnn = context.Database.GetDbConnection())
             {
                 var cmm = cnn.CreateCommand();
@@ -241,7 +241,7 @@ namespace CMS.App.Controllers
             //http://webdeveloperplus.com/jquery/create-a-dynamic-scrolling-content-box-using-ajax/ http://stackoverflow.com/questions/8480466/how-to-check-if-scrollbar-is-at-the-bottom
             //http://stackoverflow.com/questions/19933115/mvc-4-postback-on-dropdownlist-change
             StringBuilder stringBuilder = new StringBuilder();
-            using (var context = new CMSContext())
+            using (var context = new AppDbContext())
             {
                 var param = new SqlParameter[] {
                                     new SqlParameter() {
@@ -308,7 +308,7 @@ namespace CMS.App.Controllers
 
         public string[] InsertMedia(IFormFile file, string fileName, int? parentId)
         {
-            using (var context = new CMSContext())
+            using (var context = new AppDbContext())
             {
                 var param = new SqlParameter[] {
                                     new SqlParameter() {
@@ -474,7 +474,7 @@ namespace CMS.App.Controllers
         public Media GetMediaById(int id)
         {
             Media media = new Media();
-            using (var context = new CMSContext())
+            using (var context = new AppDbContext())
             {
                 var param = new SqlParameter[] {
                                     new SqlParameter() {

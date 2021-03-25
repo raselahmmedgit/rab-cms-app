@@ -7,17 +7,17 @@ using CMS.App.Models;
 using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using CMS.App.Models.ViewModels;
+using CMS.App.ViewModels;
 
 namespace CMS.App.Controllers
 {
     public class LoginController : Controller
     {
-        private UserManager<AppUser> userManager;
-        private SignInManager<AppUser> signInManager;
+        private UserManager<AspNetUser> userManager;
+        private SignInManager<AspNetUser> signInManager;
         private RoleManager<IdentityRole> roleManager;
 
-        public LoginController(UserManager<AppUser> userMgr, SignInManager<AppUser> signinMgr, RoleManager<IdentityRole> roleMgr)
+        public LoginController(UserManager<AspNetUser> userMgr, SignInManager<AspNetUser> signinMgr, RoleManager<IdentityRole> roleMgr)
         {
             userManager = userMgr;
             signInManager = signinMgr;
@@ -35,7 +35,7 @@ namespace CMS.App.Controllers
         {
             if (ModelState.IsValid)
             {
-                AppUser user = await userManager.FindByNameAsync(login.Name);
+                AspNetUser user = await userManager.FindByNameAsync(login.Name);
                 if (user != null)
                 {
                     await signInManager.SignOutAsync();
@@ -59,7 +59,7 @@ namespace CMS.App.Controllers
         {
             IdentityResult result = await roleManager.CreateAsync(new IdentityRole("Admin"));
 
-            AppUser user = new AppUser
+            AspNetUser user = new AspNetUser
             {
                 UserName = "admin",
                 Email = "admin@gmail.com"
@@ -80,7 +80,7 @@ namespace CMS.App.Controllers
         }
         public async Task<IActionResult> Delete()
         {
-            AppUser user = await userManager.FindByNameAsync("Admin");
+            AspNetUser user = await userManager.FindByNameAsync("Admin");
             IdentityResult result = await userManager.DeleteAsync(user);
             return View();
         }

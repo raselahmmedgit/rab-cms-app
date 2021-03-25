@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CMS.App.Models
 {
-    public class AppIdentityDbContext : IdentityDbContext<AppUser>
+    public class AppIdentityDbContext : IdentityDbContext<AspNetUser>
     {
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options) { }
     }

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using CMS.App.Models;
 using Microsoft.Data.SqlClient;
-using CMS.App.Models.ViewModels;
+using CMS.App.ViewModels;
 using CMS.App.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,7 +27,7 @@ namespace CMS.App.Controllers
             Page page = new Page();
             if (id != null)
             {
-                using (var context = new CMSContext())
+                using (var context = new AppDbContext())
                 {
                     var param = new SqlParameter[] {
                                     new SqlParameter() {
@@ -51,7 +51,7 @@ namespace CMS.App.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var context = new CMSContext())
+                using (var context = new AppDbContext())
                 {
                     if (id == null)
                     {
@@ -211,7 +211,7 @@ namespace CMS.App.Controllers
                 result = "Select at least 1 item";
             else
             {
-                using (var context = new CMSContext())
+                using (var context = new AppDbContext())
                 {
                     var param = new SqlParameter[] {
                                     new SqlParameter() {
@@ -250,7 +250,7 @@ namespace CMS.App.Controllers
             List<Page> list = new List<Page>();
             PageExtraData pageExtraData = new PageExtraData();
             PageList pageList = new PageList();
-            using (var context = new CMSContext())
+            using (var context = new AppDbContext())
             {
                 var param = new SqlParameter[] {
                                     new SqlParameter() {

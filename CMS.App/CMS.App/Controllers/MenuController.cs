@@ -9,7 +9,7 @@ using CMS.App.Models;
 using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using CMS.App.Models.ViewModels;
+using CMS.App.ViewModels;
 using Newtonsoft.Json;
 
 namespace CMS.App.Controllers
@@ -33,7 +33,7 @@ namespace CMS.App.Controllers
             var skip = pageSize * (Convert.ToInt32(pageNo) - 1);
             MenuList list = new MenuList();
 
-            using (var context = new CMSContext())
+            using (var context = new AppDbContext())
             {
                 var result = context.Menu.Where(x => x.Status == (status == null ? x.Status : (status == 1 ? true : false))).OrderByDescending(x => x.Id).Skip(skip).Take(pageSize).ToList();
 
@@ -61,7 +61,7 @@ namespace CMS.App.Controllers
             Menu menu = new Menu();
             if (id != null)
             {
-                using (var context = new CMSContext())
+                using (var context = new AppDbContext())
                 {
                     menu = context.Menu.Where(x => x.Id == id).FirstOrDefault();
                     BindMenu(menu);
@@ -79,7 +79,7 @@ namespace CMS.App.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var context = new CMSContext())
+                using (var context = new AppDbContext())
                 {
                     if (id == null)
                     {
@@ -168,7 +168,7 @@ namespace CMS.App.Controllers
                 result = "Select at least 1 item";
             else
             {
-                using (var context = new CMSContext())
+                using (var context = new AppDbContext())
                 {
                     var menu = context.Menu.Where(x => idChecked.Contains(x.Id.ToString())).ToList();
                     menu.ForEach(x => x.Status = Convert.ToBoolean(Convert.ToInt32(statusToChange)));

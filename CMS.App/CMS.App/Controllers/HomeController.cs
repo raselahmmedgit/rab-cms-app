@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CMS.App.Models;
-using CMS.App.Models.ViewModels;
+using CMS.App.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 using CMS.App.Infrastructure;
@@ -16,8 +16,8 @@ namespace CMS.App.Controllers
 {
     public class HomeController : Controller
     {
-        private UserManager<AppUser> userManager;
-        public HomeController(UserManager<AppUser> userMgr)
+        private UserManager<AspNetUser> userManager;
+        public HomeController(UserManager<AspNetUser> userMgr)
         {
             userManager = userMgr;
         }
@@ -25,7 +25,7 @@ namespace CMS.App.Controllers
         public IActionResult Index()
         {
             Page page = new Page();
-            using (var context = new CMSContext())
+            using (var context = new AppDbContext())
             {
                 page = context.Page.Where(t => t.Name == "Home").FirstOrDefault();
             }
@@ -35,7 +35,7 @@ namespace CMS.App.Controllers
         public IActionResult Page(string name)
         {
             Page page = new Page();
-            using (var context = new CMSContext())
+            using (var context = new AppDbContext())
             {
                 page = context.Page.Where(t => t.Url == name).FirstOrDefault();
             }
@@ -45,7 +45,7 @@ namespace CMS.App.Controllers
         public IActionResult ViewBlog(string name)
         {
             Blog blog = new Blog();
-            using (var context = new CMSContext())
+            using (var context = new AppDbContext())
             {
                 blog = context.Blog.Where(t => t.Url == name).FirstOrDefault();
                 blog.PrimaryImageUrl = blog.PrimaryImageId != null ? "/" + context.Media.Where(x => x.Id == blog.PrimaryImageId).Select(x => x.Url).FirstOrDefault() : "/images/addphoto.jpg";
@@ -60,7 +60,7 @@ namespace CMS.App.Controllers
             BlogList list = new BlogList();
 
             BlogCategory blogCategory = new BlogCategory();
-            using (var context = new CMSContext())
+            using (var context = new AppDbContext())
             {
                 blogCategory = context.BlogCategory.Where(x => x.Url == url).FirstOrDefault();
             }
@@ -90,7 +90,7 @@ namespace CMS.App.Controllers
             var skip = pageSize * (Convert.ToInt32(pageNo) - 1);
 
             BlogList bList = new BlogList();
-            using (var context = new CMSContext())
+            using (var context = new AppDbContext())
             {
                 var result = context.Blog.Where(x => x.Status == (status == null ? x.Status : (status == 1 ? true : false)) && x.Name.Contains(searchText == null ? x.Name : searchText) && (blogCategoryId == 0 || x.CategoryId == blogCategoryId)).OrderByDescending(x => x.Id).Skip(skip).Take(pageSize).ToList();
                 result.ForEach(u => u.PrimaryImageUrl = u.PrimaryImageId != null ? "/" + context.Media.Where(x => x.Id == u.PrimaryImageId).Select(x => x.Url).FirstOrDefault() : "/images/addphoto.jpg");

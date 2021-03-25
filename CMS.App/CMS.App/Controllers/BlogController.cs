@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CMS.App.Models;
-using CMS.App.Models.ViewModels;
+using CMS.App.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using CMS.App.Infrastructure;
@@ -32,7 +32,7 @@ namespace CMS.App.Controllers
             blog.PrimaryImageUrl = "/images/addphoto.jpg";
             if (id != null)
             {
-                var context = new CMSContext();
+                var context = new AppDbContext();
                 blog = context.Blog.Where(x => x.Id == id).FirstOrDefault();
                 blog.PrimaryImageUrl = blog.PrimaryImageId != null ? "/" + context.Media.Where(x => x.Id == blog.PrimaryImageId).Select(x => x.Url).FirstOrDefault() : "/images/addphoto.jpg";
                 ViewBag.Title = "Update Blog";
@@ -52,7 +52,7 @@ namespace CMS.App.Controllers
 
             if (ModelState.IsValid)
             {
-                var context = new CMSContext();
+                var context = new AppDbContext();
                 if (id == null)
                 {
                     var param = new SqlParameter[] {
@@ -163,7 +163,7 @@ namespace CMS.App.Controllers
         List<SelectListItem> GetActiveCategory()
         {
             List<SelectListItem> activeBlogCategory = new List<SelectListItem>();
-            var context = new CMSContext();
+            var context = new AppDbContext();
             activeBlogCategory = context.BlogCategory.Where(x => x.Status == true).Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
             return activeBlogCategory;
         }
@@ -172,7 +172,7 @@ namespace CMS.App.Controllers
         {
             List<SelectListItem> mediaDateList = new List<SelectListItem>();
             List<MediaDate> mdList = new List<MediaDate>();
-            var context = new CMSContext();
+            var context = new AppDbContext();
 
             /*Does not work https://docs.microsoft.com/en-us/ef/core/querying/raw-sql
             DbSet<MediaDate> set = context.Set<MediaDate>();
@@ -206,7 +206,7 @@ namespace CMS.App.Controllers
             //http://webdeveloperplus.com/jquery/create-a-dynamic-scrolling-content-box-using-ajax/ http://stackoverflow.com/questions/8480466/how-to-check-if-scrollbar-is-at-the-bottom
             //http://stackoverflow.com/questions/19933115/mvc-4-postback-on-dropdownlist-change
             System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
-            var context = new CMSContext();
+            var context = new AppDbContext();
             var param = new SqlParameter[] {
                                     new SqlParameter() {
                                         ParameterName = "@PageNo",
@@ -268,7 +268,7 @@ namespace CMS.App.Controllers
             BlogList bList = new BlogList();
             //if (canPage)
             //{
-            using (var context = new CMSContext())
+            using (var context = new AppDbContext())
             {
                // bool searchVal = string.IsNullOrEmpty(searchText);
 
@@ -302,7 +302,7 @@ namespace CMS.App.Controllers
                 result = "Select at least 1 item";
             else
             {
-                using (var context = new CMSContext())
+                using (var context = new AppDbContext())
                 {
                     var blog = context.Blog.Where(x => idChecked.Contains(x.Id.ToString())).ToList();
                     blog.ForEach(x => x.Status = Convert.ToBoolean(Convert.ToInt32(statusToChange)));

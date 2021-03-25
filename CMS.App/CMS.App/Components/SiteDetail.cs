@@ -1,6 +1,6 @@
 ﻿using CMS.App.Infrastructure;
 using CMS.App.Models;
-using CMS.App.Models.ViewModels;
+using CMS.App.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -55,7 +55,7 @@ namespace CMS.App.Components
         public async Task<IViewComponentResult> InvokeAsync()
         {
             Menu menu = new Menu();
-            using (var context = new CMSContext())
+            using (var context = new AppDbContext())
             {
                 menu =  await context.Menu.Where(x => x.Name == "Main" && x.Status == true).FirstOrDefaultAsync();
             }

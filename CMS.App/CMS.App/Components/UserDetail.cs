@@ -7,7 +7,7 @@ using CMS.App.Models;
 using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using CMS.App.Models.ViewModels;
+using CMS.App.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
@@ -15,8 +15,8 @@ namespace CMS.App.Components
 {
     public class UserDetail: ViewComponent
     {
-        private UserManager<AppUser> userManager;
-        public UserDetail(UserManager<AppUser> userMgr)
+        private UserManager<AspNetUser> userManager;
+        public UserDetail(UserManager<AspNetUser> userMgr)
         {
             userManager = userMgr;
         }
@@ -29,7 +29,7 @@ namespace CMS.App.Components
 
         public async Task<LoggedUser> GetUser()
         {
-            AppUser user = await userManager.GetUserAsync(HttpContext.User);
+            AspNetUser user = await userManager.GetUserAsync(HttpContext.User);
             var roles = await userManager.GetRolesAsync(user);
 
             LoggedUser loggedUser = new LoggedUser();

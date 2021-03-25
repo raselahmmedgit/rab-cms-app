@@ -9,7 +9,7 @@ using CMS.App.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using CMS.App.Models.ViewModels;
+using CMS.App.ViewModels;
 
 namespace CMS.App.Controllers
 {
@@ -29,7 +29,7 @@ namespace CMS.App.Controllers
 
             if (id != null)
             {
-                var context = new CMSContext();
+                var context = new AppDbContext();
                 var result = context.BlogCategory.Where(x => x.Id == id).FirstOrDefault();
                 ViewBag.Title = "Update Blog Category";
                 return View(result);
@@ -46,7 +46,7 @@ namespace CMS.App.Controllers
 
             if (ModelState.IsValid)
             {
-                var context = new CMSContext();
+                var context = new AppDbContext();
                 if (id == null)
                 {
                     var param = new SqlParameter[] {
@@ -158,7 +158,7 @@ namespace CMS.App.Controllers
         List<SelectListItem> GetActiveCategory()
         {
             List<SelectListItem> activeBlogCategory = new List<SelectListItem>();
-            var context = new CMSContext();
+            var context = new AppDbContext();
             activeBlogCategory = context.BlogCategory.Where(x => x.Status == true).Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
             return activeBlogCategory;
         }
@@ -172,7 +172,7 @@ namespace CMS.App.Controllers
                 result = "Select at least 1 item";
             else
             {
-                using (var context = new CMSContext())
+                using (var context = new AppDbContext())
                 {
                     var param = new SqlParameter[] {
                                     new SqlParameter() {
@@ -207,7 +207,7 @@ namespace CMS.App.Controllers
         {
             int pageSize = 3;
             int pageNo = page == null ? 1 : Convert.ToInt32(page);
-            var context = new CMSContext();
+            var context = new AppDbContext();
             var param = new SqlParameter[] {
                                     new SqlParameter() {
                                         ParameterName = "@PageNo",
