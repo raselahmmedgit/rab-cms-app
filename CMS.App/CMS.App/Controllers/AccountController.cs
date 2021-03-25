@@ -11,13 +11,13 @@ using CMS.App.ViewModels;
 
 namespace CMS.App.Controllers
 {
-    public class LoginController : Controller
+    public class AccountController : Controller
     {
         private UserManager<AspNetUser> userManager;
         private SignInManager<AspNetUser> signInManager;
         private RoleManager<IdentityRole> roleManager;
 
-        public LoginController(UserManager<AspNetUser> userMgr, SignInManager<AspNetUser> signinMgr, RoleManager<IdentityRole> roleMgr)
+        public AccountController(UserManager<AspNetUser> userMgr, SignInManager<AspNetUser> signinMgr, RoleManager<IdentityRole> roleMgr)
         {
             userManager = userMgr;
             signInManager = signinMgr;

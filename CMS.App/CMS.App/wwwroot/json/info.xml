@@ -1,2 +1,6 @@
 <?xml version="1.0"?>
-<Info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<Info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <siteTitle>RAB</siteTitle>
+  <siteDescription>Rasel Ahmmed Bappi</siteDescription>
+  <logo>/Upload/2021/3/RaselAhmmed.jpg</logo>
+</Info>

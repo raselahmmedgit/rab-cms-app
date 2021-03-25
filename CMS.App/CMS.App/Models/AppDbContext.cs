@@ -34,7 +34,6 @@ namespace CMS.App.Models
         public DbSet<Media> Media { get; set; }
         public DbSet<Menu> Menu { get; set; }
         public DbSet<Page> Page { get; set; }
-        public DbSet<Order> Order { get; set; }
 
         //public DbSet<MediaDate> MediaDate { get; set; }
 
@@ -49,11 +48,7 @@ namespace CMS.App.Models
             modelBuilder.Entity<Media>().Ignore(e => e.FileSize);
             modelBuilder.Entity<Media>().Ignore(e => e.FileType);
             modelBuilder.Entity<Media>().Ignore(e => e.Dimension);
-            modelBuilder.Entity<Order>().Ignore(e => e.UserName);
-            modelBuilder.Entity<Order>().Ignore(e => e.Email);
-            modelBuilder.Entity<Order>().Ignore(e => e.PhoneNumber);
-            modelBuilder.Entity<Order>().Ignore(e => e.CourseName);
-            modelBuilder.Entity<Order>().Ignore(e => e.CourseUrl);
+
             //modelBuilder.Ignore<MediaDate>();
             /*End*/
 
@@ -202,24 +197,6 @@ namespace CMS.App.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Order>(entity =>
-            {
-                entity.Property(e => e.AddedOn)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.UserId)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CourseId)
-                    .IsRequired();
-
-                entity.Property(e => e.ValidatedBy)
-                    .HasMaxLength(10)
-                    .IsUnicode(true);
-            });
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
