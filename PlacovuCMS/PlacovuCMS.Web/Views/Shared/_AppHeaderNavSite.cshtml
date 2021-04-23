@@ -1,0 +1,23 @@
+﻿<!-- ======= Top Bar ======= -->
+<section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center">
+        <span class="d-flex align-items-center ms-4">Serving the Pikes Peak Region Since 1950</span>
+    </div>
+</section>
+
+<header id="header">
+    <div class="container d-flex">
+        <span class="d-flex mr-auto">
+            @*<a href="/" class="logo"><img src="~/default/img/logo/logo.png" alt="" class="img-fluid"></a>*@
+            @await Component.InvokeAsync(nameof(SiteLogo))
+        </span>
+        <span class="d-flex mr-auto">
+            <a href="tel:719-634-2891" class="header-phone">719-634-2891</a>
+        </span>
+        <!-- menu -->
+        @await Component.InvokeAsync(nameof(SiteMenu))
+        <!-- social -->
+        @await Component.InvokeAsync(nameof(SocialMediaHeader))
+    </div>
+
+</header>

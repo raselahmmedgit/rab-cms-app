@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Role";
+    ViewData["SubTitle"] = "Role";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row mb-4">
+    <div class="col-10">
+        <h1 class="f-26">@ViewData["SubTitle"]</h1>
+    </div>
+    <div class="col-2 text-right">
+        @*<a href="@Url.Action("Add", "Role", new { Area = "" })" title="Add" class="btn btn-primary">Add New</a>*@
+    </div>
+</div>
+
+@Html.RenderAlert("RoleMessage")
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div id="errorPage">
+                    <div class="error-page">
+                        <div class="error-content">
+                            <h3>
+                                <i class="fa fa-warning text-yellow"></i>Welcome!
+                            </h3>
+                            <p>
+                                Coming soon...
+                            </p>
+                        </div>
+                    </div>
+                    <!-- /.error-page -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

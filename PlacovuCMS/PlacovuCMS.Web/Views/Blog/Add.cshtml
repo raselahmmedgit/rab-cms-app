@@ -1,0 +1,274 @@
+﻿@model BlogViewModel
+@{
+    ViewData["Title"] = @ViewBag.Title;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<script src="~/lib/CKEditor/ckeditor.js" type="text/javascript" language="javascript"></script>
+<div class="row mb-4">
+    <div class="col-10">
+        <h1 class="f-26">@ViewBag.Title</h1>
+    </div>
+    <div class="col-2 text-right">
+        <a href="@Url.Action("Index", "Blog", new { Area = "" })" title="Back" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+
+@Html.RenderAlert("BlogMessage")
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post">
+                    <div class="form-body">
+                        <div class="form-group row">
+                            <label asp-for="Name" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="Url" class="control-label"></label>
+                                <span>: @Context.Request.Scheme://@Context.Request.Host/</span>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="Url" class="form-control" />
+                                <span asp-validation-for="Url"></span>
+                            </div>
+                            <div class="col-5">
+                                <p class="text-muted">example: @Context.Request.Scheme://@Context.Request.Host/sample</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="PrimaryImageId" class="col-3 control-label"></label>
+                            <div class="col-8 primaryImage">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <img class="w-25" id="primaryImg" src="@Model.PrimaryImageUrl" />
+                                        <input type="hidden" asp-for="PrimaryImageId" />
+                                        <input type="hidden" asp-for="PrimaryImageUrl" />
+                                    </div>
+                                    <div class="col-2">
+                                        <img id="crossImg" src="~/admin/images/close-icon.png" class="mt-5" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="CategoryId" class="col-3 control-label"></label>
+                            <select class="col-4 form-control" asp-for="CategoryId" asp-items="ViewBag.CategoryList">
+                                <option selected value="Select">Select</option>
+                            </select>
+                            <span asp-validation-for="CategoryId"></span>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="Description" class="col-3 control-label"></label>
+                            <textarea asp-for="Description" class="col-6 form-control"></textarea>
+                            <script type="text/javascript" language="javascript">
+                CKEDITOR.replace(@Html.IdFor(model => model.Description));
+                CKEDITOR.config.allowedContent = true
+                CKEDITOR.ignoreEmptyParagraph = true;
+                            </script>
+                            <span asp-validation-for="Description"></span>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="MetaTitle" class="col-3 control-label"></label>
+                            <input asp-for="MetaTitle" class="col-4 form-control" />
+                            <span asp-validation-for="MetaTitle"></span>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="MetaKeyword" class="col-3 control-label"></label>
+                            <input asp-for="MetaKeyword" class="col-4 form-control" />
+                            <span asp-validation-for="MetaKeyword"></span>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="MetaDescription" class="col-3 control-label"></label>
+                            <input asp-for="MetaDescription" class="col-4 form-control" />
+                            <span asp-validation-for="MetaDescription"></span>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Status" class="col-3 control-label"></label>
+                            <select class="col-4 form-control" asp-for="Status">
+                                <option value="true">Active</option>
+                                <option value="false">InActive</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-actions form-actions-new">
+                        <div class="row">
+                            <div class="col-12">
+                                <input type="submit" class="btn btn-primary" value="Submit" />
+                                <a href="@Url.Action("Index", "Blog", new { Area = "" })" title="Back" class="btn btn-danger ml-2">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="float-left">
+                    <h5 class="modal-title">Modal title</h5>
+                </div>
+                <div class="float-right">
+                    <div class="float-left mr-2">
+                        <input id="serchName" type="text" placeholder="Search" class="form-control" />
+                    </div>
+                    <div class="float-left mr-2">
+                        <select id="date" asp-items="ViewBag.MediaDate" class="form-control">
+                            <option value="All">Date</option>
+                        </select>
+                    </div>
+                    <div class="float-left mr-2">
+                        <a href="@Url.Action("Add", "Media", new { Area = "" })" target="_blank" title="Add New Media" class="btn btn-info">Add New Media</a>
+                    </div>
+                    <div class="float-left">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" style="overflow:auto;height:300px;">
+                <div class="row" id="allMedia">
+                </div>
+                <input type="hidden" id="page" value="1" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Set as Primary Image</button>
+            </div>
+        </div>
+        <!-- END Modal content-->
+
+    </div>
+</div>
+<!-- END Bootstrap Modal -->
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            ShowHideCross();
+
+            $("#primaryImg").click(function () {
+                $("#myModal").modal("show");
+                if ($('#page').val() != 'end') {
+                    Initialize();
+                    GetMediaWithPaging()
+                }
+            });
+
+            $("#crossImg").click(function () {
+                $("#primaryImg").attr("src", "/default/images/default-addphoto-image.jpg")
+                $("#PrimaryImageId").val("");
+                $("#PrimaryImageUrl").val("");
+
+                $(this).hide();
+            });
+
+            function ShowHideCross() {
+                if ($("#primaryImg").attr("src") != "/default/images/default-addphoto-image.jpg")
+                    $("#crossImg").css("display", "block")
+                else
+                    $("#crossImg").css("display", "none")
+            }
+
+            $(".modal-footer > button").click(function () {
+                var imageId = $("#allMedia div input[type='checkbox']:checked").siblings().attr("href").replace("/Media/Update/", "").replace("/media/update/", "");
+                var imageUrl = $("#allMedia div input[type='checkbox']:checked").parent().find("img").attr("data-url");
+
+                $("#primaryImg").attr("src", imageUrl)
+                $("#PrimaryImageUrl").val(imageUrl);
+                $("#PrimaryImageId").val(imageId);
+
+                ShowHideCross();
+                
+            });
+
+            $("#allMedia").on("change", "input[type='checkbox']", function () {
+                if ($(this).prop('checked')) {
+                    $("#allMedia li input[type='checkbox']").prop("checked", false);
+                    $("#allMedia li").removeClass("selected");
+                    $(this).prop("checked", true);
+                    $(this).parent().addClass("selected");
+                }
+                else
+                    $(this).parent().removeClass("selected");
+            });
+
+            $('.modal-body').scroll(function () {
+                var div = $(this);
+                if (div[0].scrollHeight - div.scrollTop() - 100 <= div.height()) {
+                    //alert('Reached the bottom!');
+                    if ($('#page').val() != 'end') {
+                        var page = parseInt($('#page').val());
+                        page = page + 1;
+                        $('#page').val(page);
+                        GetMediaWithPaging();
+                    }
+                }
+            });
+
+            $("#serchName").keyup(function () {
+                Initialize();
+                GetMediaWithPaging();
+            });
+
+            $('#date').change(function () {
+                Initialize();
+                GetMediaWithPaging();
+            });
+
+            function GetMediaWithPaging() {
+                var date = $("#date").val();
+                var page = $('#page').val();
+                var name = $('#serchName').val();
+
+                //http://stackoverflow.com/questions/1191485/how-to-call-ajaxstart-on-specific-ajax-calls
+                $(document).unbind(".firstCall");
+                $(document).on("ajaxStart.firstCall", function () {
+                    App.LoaderShow();
+                });
+                $(document).on("ajaxStop.firstCall", function () {
+                    App.LoaderHide();
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Blog/GetMediaWithPaging",
+                    data: { date: date, page: page, name: name },
+                    dataType: "html",
+                    success: function (msg) {
+                        if (msg == '')
+                            $('#page').val('end');
+                        else
+                            $("#allMedia").append(msg);
+                    },
+                    error: function (req, status, error) {
+                        alert(error);
+                    }
+                });
+                return false;
+            }
+
+            function Initialize() {
+                $('#page').val('1');
+                $('#allMedia').html('');
+            }
+        });
+    </script>
+}

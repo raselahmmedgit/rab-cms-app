@@ -1,0 +1,8 @@
+﻿@model PageViewModel;
+@{
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+    if (Model != null)
+    {
+        @Html.Raw(Model.Description);
+    }
+}

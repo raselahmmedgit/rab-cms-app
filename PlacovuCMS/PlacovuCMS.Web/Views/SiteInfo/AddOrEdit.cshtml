@@ -1,0 +1,220 @@
+﻿@model SiteInfoViewModel
+@{
+    ViewData["Title"] = ViewBag.Title;
+    ViewData["SubTitle"] = ViewBag.Title;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script src="~/lib/CKEditor/ckeditor.js" type="text/javascript" language="javascript"></script>
+<div class="row mb-4">
+    <div class="col-10">
+        <h1 class="f-26">@ViewData["SubTitle"]</h1>
+    </div>
+    <div class="col-2 text-right">
+        <a href="@Url.Action("Index", "SiteInfo", new { Area = "" })" title="Back" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+
+@Html.RenderAlert("SiteInfoMessage")
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h2>@TempData["result"]</h2>
+                <form method="post" asp-action="Save" asp-controller="SiteInfo">
+                    <div class="form-body">
+                        <div class="form-group row">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" asp-for="Id" />
+                            <label asp-for="SiteTitle" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="SiteTitle" class="form-control" />
+                                <span asp-validation-for="SiteTitle"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="SiteDescription" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="SiteDescription" class="form-control" />
+                                <span asp-validation-for="SiteDescription"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="SiteKeywords" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="SiteKeywords" class="form-control" />
+                                <span asp-validation-for="SiteKeywords"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="SiteAuthor" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="SiteAuthor" class="form-control" />
+                                <span asp-validation-for="SiteAuthor"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="SiteCanonicalUrl" class="control-label"></label>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="SiteCanonicalUrl" class="form-control" value="@Context.Request.Scheme://@Context.Request.Host" />
+                                <span asp-validation-for="SiteCanonicalUrl"></span>
+                            </div>
+                            <div class="col-5">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="SiteShortlinkUrl" class="control-label"></label>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="SiteShortlinkUrl" class="form-control" value="@Context.Request.Scheme://@Context.Request.Host" />
+                                <span asp-validation-for="SiteShortlinkUrl"></span>
+                            </div>
+                            <div class="col-5">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="SiteUrl" class="control-label"></label>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="SiteUrl" class="form-control" value="@Context.Request.Scheme://@Context.Request.Host" />
+                                <span asp-validation-for="SiteUrl"></span>
+                            </div>
+                            <div class="col-5">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="SiteImageUrl" class="control-label"></label>
+                                <span>: @Context.Request.Scheme://@Context.Request.Host/</span>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="SiteImageUrl" class="form-control" />
+                                <span asp-validation-for="SiteImageUrl"></span>
+                            </div>
+                            <div class="col-5">
+                                <p class="text-muted">example: @Context.Request.Scheme://@Context.Request.Host/sample</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="SiteName" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="SiteName" class="form-control" />
+                                <span asp-validation-for="SiteName"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="SitePhoneNumber" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="SitePhoneNumber" class="form-control" />
+                                <span asp-validation-for="SitePhoneNumber"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="SiteOfficeNumber" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="SiteOfficeNumber" class="form-control" />
+                                <span asp-validation-for="SiteOfficeNumber"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="SiteLogoUrl" class="control-label"></label>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="SiteLogoUrl" class="form-control" />
+                                <span asp-validation-for="SiteLogoUrl"></span>
+                            </div>
+                            <div class="col-5">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="SiteFavicon16X16Url" class="control-label"></label>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="SiteFavicon16X16Url" class="form-control" />
+                                <span asp-validation-for="SiteFavicon16X16Url"></span>
+                            </div>
+                            <div class="col-5">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="SiteFavicon32X32Url" class="control-label"></label>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="SiteFavicon32X32Url" class="form-control" />
+                                <span asp-validation-for="SiteFavicon32X32Url"></span>
+                            </div>
+                            <div class="col-5">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="SiteFavicon180x180Url" class="control-label"></label>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="SiteFavicon180x180Url" class="form-control" />
+                                <span asp-validation-for="SiteFavicon180x180Url"></span>
+                            </div>
+                            <div class="col-5">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="SiteFavicon192x192Url" class="control-label"></label>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="SiteFavicon192x192Url" class="form-control" />
+                                <span asp-validation-for="SiteFavicon192x192Url"></span>
+                            </div>
+                            <div class="col-5">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="SiteGoogleSiteVerification" class="control-label"></label>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="SiteGoogleSiteVerification" class="form-control" />
+                                <span asp-validation-for="SiteGoogleSiteVerification"></span>
+                            </div>
+                            <div class="col-5">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-actions form-actions-new">
+                        <div class="row">
+                            <div class="col-12">
+                                <input type="submit" class="btn btn-primary" value="Submit" />
+                                <a href="@Url.Action("Add", "SiteInfo", new { Area = "" })" title="Back" class="btn btn-danger ml-2">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

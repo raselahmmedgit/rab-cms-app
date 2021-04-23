@@ -1,0 +1,17 @@
+﻿@model PageViewModel;
+@{
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+    if (Model != null)
+    {
+        @Html.Raw(Model.Description);
+    }
+}
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            EmploymentApplication.Init();
+        });
+    </script>
+}

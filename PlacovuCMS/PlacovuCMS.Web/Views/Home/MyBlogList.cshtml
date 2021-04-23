@@ -1,0 +1,93 @@
+﻿@model BlogList
+@{
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+    ViewBag.Title = ViewData["Title"];
+    var blogCategory = (IEnumerable<BlogCategoryViewModel>)ViewBag.BlogCategory;
+    var blogs = (IEnumerable<BlogViewModel>)ViewBag.Blogs;
+}
+
+@section Styles{
+    <link href="~/default/css/blog.css" rel="stylesheet" />
+}
+<section class="p-5">
+    <h1>@ViewData["Title"]</h1>
+    <div class="row">
+        <div class="col-md-8" style="overflow:hidden;margin-top:50px;">
+            @foreach (var blog in Model.blog)
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3><a class="blog-title" href="@Url.Action("MyBlog","Home")?name=@blog.Url">@blog.Name</a></h3>
+                        <span class="blog-posted-on">@String.Format("{0:ddd, MMM d, yyyy}", blog.AddedOn)</span>
+                        <div class="mt-2"></div>
+                        <a href="@Url.Action("MyBlog","Home")?name=@blog.Url">
+                            @if (!string.IsNullOrEmpty(blog.PrimaryImageUrl))
+                            {
+                                <img class="img-responsive w-100" style="max-height:400px;" src="@blog.PrimaryImageUrl" alt="@blog.Name" />
+                            }
+                        </a>
+                        <div class="blog-description">
+                            @{
+                                string description = System.Text.RegularExpressions.Regex.Replace(blog.Description, @"<(.|\n)*?>", string.Empty);
+                                <p>@Html.Raw(description.Substring(0, (description.Length > 240 ? 240 : description.Length))) [...]</p>
+                            }
+                        </div>
+                        <div class="text-center">
+                            <a class="btn-continue-reading primary is-outline is-smaller" href="@Url.Action("MyBlog","Home")?name=@blog.Url">
+                                Continue reading <span class="meta-nav">→</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-md-4">
+            <h3 class="blog-widget-title" style="padding-top:140px;">CATEGORIES</h3>
+            <div class="is-divider"></div>
+            <ul class="list-group">
+                @foreach (var category in blogCategory)
+                {
+                    if (category.totalBlogs > 0)
+                    {
+                        <li class="list-group-item" style="border:none">
+                            <h3 class="blog-widget-recent-link">
+                                @Html.ActionLink($"{@category.Name}", "MyBlogList", "Home", new { id = $"{category.Id}" }, new { @style = "color:#334862" })
+                                <span class="badge badge-info badge-pill">@category.totalBlogs</span>
+                            </h3>
+                        </li>
+                    }
+                }
+            </ul>
+
+            <h3 class="blog-widget-title" style="padding-top:50px;">LATEST POSTS</h3>
+            <div class="is-divider"></div>
+            <ul class="list-group list-group-flush" style="list-style-type: none;">
+                @foreach (var b in blogs)
+                {
+                    <li>
+                        <div class="row mt-3">
+                            <div class="blog-widget-recent-date badge col-2 ml-4">
+                                <div class="badge-inner bg-fill">
+                                    <span>@String.Format("{0:dd}", b.AddedOn)</span><br>
+                                    <span>@String.Format("{0:MMM}", b.AddedOn)</span>
+                                </div>
+                            </div>
+                            <div class="blog-widget-recent-link col-9">
+                                @Html.ActionLink(b.Name, "MyBlog", "Home", new { name = $"{b.Url}" }, new { @style = "color:#334862" })
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="pagingDiv">
+        @{
+            var actionName = ViewBag.url == null ? "MyBlogList" : "MyBlogCategoryList";
+        }
+        <div page-model="@Model.pagingInfo" status="@Model.status" search-text="@Model.searchText" page-action="@actionName" page-classes-enabled="true" page-class="paging" page-class-selected="active" page-other-url="@ViewBag.url"></div>
+    </div>
+</section>
+    
+
+

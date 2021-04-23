@@ -1,0 +1,83 @@
+﻿@model SocialMediaConfigViewModel
+@{
+    ViewData["Title"] = "Social Media Config Detail";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row mb-4">
+    <div class="col-10">
+        <h1 class="f-26">Social Media Config Detail</h1>
+    </div>
+    <div class="col-2 text-right">
+        <a href="@Url.Action("Index", "SocialMediaConfig", new { Area = "" })" title="Back" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+
+@Html.RenderAlert("SocialMediaConfigMessage")
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="javascript.void(0);" class="form form-horizontal">
+
+                    <div class="form-body">
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.FacebookUrl, new { @class = "col-4 control-label" })
+                            <div class="col-8">
+                                @Html.DisplayFor(model => model.FacebookUrl)
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.LinkedInUrl, new { @class = "col-4 control-label" })
+                            <div class="col-8">
+                                @Html.DisplayFor(model => model.LinkedInUrl)
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.InstagramUrl, new { @class = "col-4 control-label" })
+                            <div class="col-8">
+                                @Html.DisplayFor(model => model.InstagramUrl)
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.TwitterUrl, new { @class = "col-4 control-label" })
+                            <div class="col-8">
+                                @Html.DisplayFor(model => model.TwitterUrl)
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.TumblrUrl, new { @class = "col-4 control-label" })
+                            <div class="col-8">
+                                @Html.DisplayFor(model => model.TumblrUrl)
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.YouTubeUrl, new { @class = "col-4 control-label" })
+                            <div class="col-8">
+                                @Html.DisplayFor(model => model.YouTubeUrl)
+                            </div>
+                        </div>
+
+                        <div class="form-actions form-actions-new">
+                            <div class="row">
+                                <div class="col-12">
+                                    <a href="@Url.Action("Index", "SocialMediaConfig", new { Area = "" })" title="Back" class="btn btn-danger">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <partial name="_AppHeadCssScriptSite" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id =GTM-W3V2MQJ" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="appPreLoader"></div>
+    <partial name="_AppHeaderNavSite" />
+    @RenderBody()
+    <partial name="_AppFooterCssScriptSite" />
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

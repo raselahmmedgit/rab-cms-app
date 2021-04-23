@@ -1,0 +1,91 @@
+﻿@model List<FileUpload>
+@{
+    ViewData["Title"] = "Add Media";
+    ViewData["SubTitle"] = "Add Media";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row mb-4">
+    <div class="col-10">
+        <h1 class="f-26">@ViewData["SubTitle"]</h1>
+    </div>
+    <div class="col-2 text-right">
+        <a href="@Url.Action("Index", "Media", new { Area = "" })" title="Back" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+
+@Html.RenderAlert("MediaMessage")
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(ViewBag.result))
+                {
+                    <h2>@ViewBag.Result</h2>
+                }
+                <form method="post" asp-action="Add" enctype="multipart/form-data">
+                    <div class="form-body">
+                        <div class="form-group row">
+                            <label for="mediaUpload" class="col-3 control-label">Upload</label>
+                            <div class="col-4">
+                                <input type="file" multiple name="mediaUpload" class="form-control-file" />
+                                <span class="field-validation-valid" data-valmsg-for="mediaUpload" data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+                        <div class="form-actions form-actions-new">
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="submit" class="btn btn-primary" value="Submit" />
+                                    <a href="@Url.Action("Index", "Media", new { Area = "" })" title="Back" class="btn btn-danger ml-2">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                @if (Model != null)
+                {
+                    <div class="mt-5 mb-5">
+                        <table id="dataTablesMedia" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th class="w-20">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.name
+                                        </td>
+                                        <td>
+                                            <img width="32" height="32" src="@Url.Content(item.url)" />
+                                        </td>
+                                        <td>
+                                            <a href="/Media/Edit/@item.id" class="btn btn-warning">Edit</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    @*<div id="mediaItem">
+                            @foreach (var p in Model)
+                            {
+                                <div class="item">
+                                    <img width="32" height="32" src="@Url.Content(p.url)" />
+                                    <a asp-action="Edit" asp-route-id="@p.id">Edit</a>
+                                    <div><span>@p.name</span></div>
+                                </div>
+                            }
+                        </div>*@
+                }
+            </div>
+        </div>
+    </div>
+</div>

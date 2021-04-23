@@ -1,0 +1,124 @@
+﻿@model SocialMediaConfigViewModel
+@{
+    ViewData["Title"] = "Add Social Media Config";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script src="~/lib/CKEditor/ckeditor.js" type="text/javascript" language="javascript"></script>
+<div class="row mb-4">
+    <div class="col-10">
+        <h1 class="f-26">Add Social Media Config</h1>
+    </div>
+    <div class="col-2 text-right">
+        <a href="@Url.Action("Index", "SocialMediaConfig", new { Area = "" })" title="Back" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+
+@Html.RenderAlert("SocialMediaConfigMessage")
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h2>@TempData["result"]</h2>
+                <form method="post" asp-action="Save" asp-controller="SocialMediaConfig">
+                    <div class="form-body">
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="FacebookUrl" class="control-label"></label>
+                                <span>: www.facebook.com/</span>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="FacebookUrl" class="form-control" />
+                                <span asp-validation-for="FacebookUrl"></span>
+                            </div>
+                            <div class="col-5">
+                                <p class="text-muted">example: www.facebook.com/sample</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="LinkedInUrl" class="control-label"></label>
+                                <span>: www.linkedin.com/</span>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="LinkedInUrl" class="form-control" />
+                                <span asp-validation-for="LinkedInUrl"></span>
+                            </div>
+                            <div class="col-5">
+                                <p class="text-muted">example: www.linkedin.com/sample</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="InstagramUrl" class="control-label"></label>
+                                <span>: www.instagram.com/</span>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="InstagramUrl" class="form-control" />
+                                <span asp-validation-for="InstagramUrl"></span>
+                            </div>
+                            <div class="col-5">
+                                <p class="text-muted">example: www.instagram.com/sample</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="TwitterUrl" class="control-label"></label>
+                                <span>: www.twitter.com/</span>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="TwitterUrl" class="form-control" />
+                                <span asp-validation-for="TwitterUrl"></span>
+                            </div>
+                            <div class="col-5">
+                                <p class="text-muted">example: www.twitter.com/sample</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="TumblrUrl" class="control-label"></label>
+                                <span>: www.tumblr.com/</span>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="TumblrUrl" class="form-control" />
+                                <span asp-validation-for="TumblrUrl"></span>
+                            </div>
+                            <div class="col-5">
+                                <p class="text-muted">example: www.tumblr.com/sample</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="YouTubeUrl" class="control-label"></label>
+                                <span>: www.youtube.com/</span>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="YouTubeUrl" class="form-control" />
+                                <span asp-validation-for="YouTubeUrl"></span>
+                            </div>
+                            <div class="col-5">
+                                <p class="text-muted">example: www.youtube.com/sample</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-actions form-actions-new">
+                        <div class="row">
+                            <div class="col-12">
+                                <input type="submit" class="btn btn-primary" value="Submit" />
+                                <a href="@Url.Action("Index", "EmailSmsConfig", new { Area = "" })" title="Back" class="btn btn-danger ml-2">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

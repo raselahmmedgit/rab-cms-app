@@ -1,0 +1,169 @@
+﻿@model EmailSmsConfigViewModel
+@{
+    ViewData["Title"] = ViewBag.Title;
+    ViewData["SubTitle"] = ViewBag.Title;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script src="~/lib/CKEditor/ckeditor.js" type="text/javascript" language="javascript"></script>
+<div class="row mb-4">
+    <div class="col-10">
+        <h1 class="f-26">@ViewData["SubTitle"]</h1>
+    </div>
+    <div class="col-2 text-right">
+        <a href="@Url.Action("Index", "EmailSmsConfig", new { Area = "" })" title="Back" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+
+@Html.RenderAlert("PageMessage")
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h2>@TempData["result"]</h2>
+                <form method="post" asp-action="Save" asp-controller="EmailSmsConfig">
+                    <div class="form-body">
+
+                        <div class="form-group row">
+                            <label asp-for="FromEmailAddress" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="FromEmailAddress" class="form-control" />
+                                <span asp-validation-for="FromEmailAddress"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="FromEmailAddressDisplayName" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="FromEmailAddressDisplayName" class="form-control" />
+                                <span asp-validation-for="FromEmailAddressDisplayName"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="Password" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="Password" class="form-control" />
+                                <span asp-validation-for="Password"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="Host" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="Host" class="form-control" />
+                                <span asp-validation-for="Host"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="Port" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="Port" class="form-control" />
+                                <span asp-validation-for="Port"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="AllowSsl" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="AllowSsl" class="form-control form-control-checkbox" />
+                                <span asp-validation-for="AllowSsl"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="SendGridFromEmailAddress" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="SendGridFromEmailAddress" class="form-control" />
+                                <span asp-validation-for="SendGridFromEmailAddress"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="SendGridFromEmailAddressDisplayName" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="SendGridFromEmailAddressDisplayName" class="form-control" />
+                                <span asp-validation-for="SendGridFromEmailAddressDisplayName"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="FromEmailAddress" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="FromEmailAddress" class="form-control" />
+                                <span asp-validation-for="FromEmailAddress"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="SendGridApiKey" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="SendGridApiKey" class="form-control" />
+                                <span asp-validation-for="SendGridApiKey"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="TestEmailAddress" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="TestEmailAddress" class="form-control" />
+                                <span asp-validation-for="TestEmailAddress"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="SmsFromNumber" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="SmsFromNumber" class="form-control" />
+                                <span asp-validation-for="SmsFromNumber"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="SmsAccountSid" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="SmsAccountSid" class="form-control" />
+                                <span asp-validation-for="SmsAccountSid"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="SmsAuthToken" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="SmsAuthToken" class="form-control" />
+                                <span asp-validation-for="SmsAuthToken"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="AllowSms" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="AllowSms" class="form-control form-control-checkbox" />
+                                <span asp-validation-for="AllowSms"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="AllowEmail" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="AllowEmail" class="form-control form-control-checkbox" />
+                                <span asp-validation-for="AllowEmail"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-actions form-actions-new">
+                        <div class="row">
+                            <div class="col-12">
+                                <input type="submit" class="btn btn-primary" value="Submit" />
+                                <a href="@Url.Action("Index", "EmailSmsConfig", new { Area = "" })" title="Back" class="btn btn-danger ml-2">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿@model NewsContentViewModel
+@{
+    ViewData["Title"] = "All News";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row mb-4">
+    <div class="col-10">
+        <h1 class="f-26">All News</h1>
+    </div>
+    <div class="col-2 text-right">
+        <a href="@Url.Action("Add", "NewsContent", new { Area = "" })" title="Add News" class="btn btn-primary">Add News</a>
+    </div>
+</div>
+
+@Html.RenderAlert("NewsContentMessage")
+
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <table id="dataTablesNewsContent" class="table table-hover" style="width:100%"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/admin/js/news-content.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            NewsContent.LoadDataTables('dataTablesNewsContent', App.DisplayLength(), ("/NewsContent/GetDataAsync"));
+        });
+    </script>
+}

@@ -1,0 +1,133 @@
+﻿@model MediaViewModel
+@{
+    ViewData["Title"] = "Edit Media";
+    ViewData["SubTitle"] = "Edit Media";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row mb-4">
+    <div class="col-10">
+        <h1 class="f-26">@ViewData["SubTitle"]</h1>
+    </div>
+    <div class="col-2 text-right">
+        <a href="@Url.Action("Index", "Media", new { Area = "" })" title="Back" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+
+@Html.RenderAlert("MediaMessage")
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(ViewBag.result))
+                {
+                    <h2>@ViewBag.result</h2>
+                }
+                <form method="post">
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-body">
+                                <div class="form-group row">
+                                    <label class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <img src="~/@Model.DisplayUrl" class="img-fluid" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-body">
+                                <div class="form-group row">
+                                    <label asp-for="Name" class="col-3 control-label"></label>
+                                    <input type="hidden" asp-for="Id" />
+                                    <input type="hidden" asp-for="Name" />
+                                    <div class="col-9">
+                                        @Model.Name
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label asp-for="FileType" class="col-3 control-label"></label>
+                                    <input type="hidden" asp-for="FileType" />
+                                    <div class="col-9">
+                                        @Model.FileType
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label asp-for="AddedOn" class="col-3 control-label"></label>
+                                    <input type="hidden" asp-for="AddedOn" />
+                                    <div class="col-9">
+                                        @Model.AddedOn
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label asp-for="FileSize" class="col-3 control-label"></label>
+                                    <input type="hidden" asp-for="FileSize" />
+                                    <div class="col-9">
+                                        @Model.FileSize
+                                    </div>
+                                </div>
+                                @if (Model.Dimension != null)
+                                {
+                                    <div class="form-group row">
+                                        <label asp-for="Dimension" class="col-3 control-label"></label>
+                                        <input type="hidden" asp-for="Dimension" />
+                                        <div class="col-9">
+                                            @Model.Dimension
+                                        </div>
+                                    </div>
+                                }
+                                <div class="form-group row">
+                                    <label asp-for="Url" class="col-3 control-label"></label>
+                                    <input type="hidden" asp-for="Url" />
+                                    <div class="col-9">
+                                        <input type="text" class="form-control app-copy-url" readonly value="@Model.Url" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12 text-right">
+                                        <input type="button" class="btn btn-sm btn-info" onclick="App.AppCopyUrl()" value="Copy Url">
+                                    </div>
+                                </div>
+                                <h3 class="f-20">Edit</h3>
+                                <div class="form-group row">
+                                    <label asp-for="Title" class="col-3 control-label"></label>
+                                    <div class="col-9">
+                                        <input asp-for="Title" class="form-control" />
+                                        <span asp-validation-for="Title"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label asp-for="Alt" class="col-3 control-label"></label>
+                                    <div class="col-9">
+                                        <input asp-for="Alt" class="form-control" />
+                                        <span asp-validation-for="Alt"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label asp-for="Description" class="col-3 control-label"></label>
+                                    <div class="col-9">
+                                        <input asp-for="Description" class="form-control" />
+                                        <span asp-validation-for="Description"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-actions form-actions-new">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="submit" class="btn btn-primary" value="Submit" />
+                                        <a href="@Url.Action("Index", "Media", new { Area = "" })" title="Back" class="btn btn-danger ml-2">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

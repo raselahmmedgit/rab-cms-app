@@ -1,0 +1,43 @@
+﻿@model SocialMediaConfigViewModel
+@if (Model != null)
+{
+    <div class="row social-nav">
+        <div class="col-12 d-flex align-items-center justify-content-center">
+            <div class="dropdown">
+                <button class="social-nav-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="@Url.Content("~/site/img/share-Icon.png")" data-src="@Url.Content("~/site/img/share-Icon.png")" class="lazy text-right" />
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <ul>
+                        <li>
+                            <a class="dropdown-item" href="@Model.FacebookUrl" target="_blank">
+                                <img class="lazy" data-src="@Url.Content("~/site/img/facebook.png")" />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="@Model.InstagramUrl" target="_blank">
+                                <img class="lazy" data-src="@Url.Content("~/site/img/Instagram.png")" />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="@Model.TwitterUrl" target="_blank">
+                                <img class="lazy" data-src="@Url.Content("~/site/img/twitter.png")" />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="@Model.YouTubeUrl" target="_blank">
+                                <img class="lazy" data-src="@Url.Content("~/site/img/youtube.png")" />
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="@Model.LinkedInUrl" target="_blank">
+                                <img class="lazy" data-src="@Url.Content("~/site/img/Linkedin.png")" />
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>
+        </div>
+    </div>
+}

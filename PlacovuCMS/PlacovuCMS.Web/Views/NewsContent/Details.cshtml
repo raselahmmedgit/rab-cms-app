@@ -1,0 +1,63 @@
+﻿@model NewsContentViewModel
+@{
+    ViewData["Title"] = "News Detail";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row mb-4">
+    <div class="col-10">
+        <h1 class="f-26">News Detail</h1>
+    </div>
+    <div class="col-2 text-right">
+        <a href="@Url.Action("Index", "NewsContent", new { Area = "" })" title="Back" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+
+@Html.RenderAlert("NewsContentMessage")
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="javascript.void(0);" class="form form-horizontal">
+
+                    <div class="form-body">
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.NewsTitle, new { @class = "col-4 control-label" })
+                            <div class="col-8">
+                                @Html.DisplayFor(model => model.NewsTitle)
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.NewsDetails, new { @class = "col-4 control-label" })
+                            <div class="col-8">
+                                @Html.DisplayFor(model => model.NewsDetails)
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.NewsKeywords, new { @class = "col-4 control-label" })
+                            <div class="col-8">
+                                @Html.DisplayFor(model => model.NewsKeywords)
+                            </div>
+                        </div>
+
+                        
+                        <div class="form-actions form-actions-new">
+                            <div class="row">
+                                <div class="col-12">
+                                    <a href="@Url.Action("Index", "NewsContent", new { Area = "" })" title="Back" class="btn btn-danger">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

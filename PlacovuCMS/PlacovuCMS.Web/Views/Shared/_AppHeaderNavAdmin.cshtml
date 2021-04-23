@@ -1,0 +1,14 @@
+﻿<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand" href="@Url.Action("Index", "Admin", new { Area = "" })">
+                <img src="~/default/images/logo.png" alt="home" class="img-logo" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @await Component.InvokeAsync(nameof(UserDetail))
+        </div>
+    </nav>
+</header>

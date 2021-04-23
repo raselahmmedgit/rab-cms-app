@@ -1,0 +1,11 @@
+﻿@model SocialMediaConfigViewModel
+@if (Model != null)
+{
+    <div class="social-links text-center text-md-right pt-3 pt-md-0">
+        <a href="@Model.FacebookUrl" target="_blank" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="@Model.InstagramUrl" target="_blank" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="@Model.TwitterUrl" target="_blank" class="twitter"><i class="bx bxl-twitter"></i></a>
+        <a href="@Model.YouTubeUrl" target="_blank" class="youtube"><i class="bx bxl-youtube"></i></a>
+        <a href="@Model.LinkedInUrl" target="_blank" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+    </div>
+}

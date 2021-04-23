@@ -1,0 +1,67 @@
+﻿@model NewsContentViewModel
+@{
+    ViewData["Title"] = "Edit News";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script src="~/lib/CKEditor/ckeditor.js" type="text/javascript" language="javascript"></script>
+<div class="row mb-4">
+    <div class="col-10">
+        <h1 class="f-26">Edit News</h1>
+    </div>
+    <div class="col-2 text-right">
+        <a href="@Url.Action("Index", "NewsContent", new { Area = "" })" title="Back" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+
+@Html.RenderAlert("NewsContentMessage")
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h2>@TempData["result"]</h2>
+                <form method="post" asp-action="Save" asp-controller="NewsContent">
+                    <div class="form-body">
+                        <input asp-for="Id" class="form-control" hidden/>
+                        <div class="form-group row">
+                            <label asp-for="NewsTitle" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="NewsTitle" class="form-control" />
+                                <span asp-validation-for="NewsTitle"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="NewsDetails" class="col-3 control-label"></label>
+                            <textarea asp-for="NewsDetails" class="col-6 form-control"></textarea>
+                            <script type="text/javascript" language="javascript">
+                CKEDITOR.replace(@Html.IdFor(model => model.NewsDetails));
+                CKEDITOR.config.allowedContent = true
+                CKEDITOR.ignoreEmptyParagraph = true;
+                            </script>
+                            <span asp-validation-for="NewsDetails"></span>
+                        </div>
+
+                        <div class="form-group row">
+                            <label asp-for="NewsKeywords" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="NewsKeywords" class="form-control" />
+                                <span asp-validation-for="NewsKeywords"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-actions form-actions-new">
+                        <div class="row">
+                            <div class="col-12">
+                                <input type="submit" class="btn btn-primary" value="Submit" />
+                                <a href="@Url.Action("Index", "NewsContent", new { Area = "" })" title="Back" class="btn btn-danger ml-2">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

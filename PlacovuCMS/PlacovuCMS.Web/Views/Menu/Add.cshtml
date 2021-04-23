@@ -1,0 +1,138 @@
+﻿@model Menu
+@{
+    ViewData["Title"] = ViewBag.Title;
+    ViewData["SubTitle"] = ViewBag.Title;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<link href="~/lib/Nestable-master/style.css" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
+<div class="row mb-4">
+    <div class="col-10">
+        <h1 class="f-26">@ViewData["SubTitle"]</h1>
+    </div>
+    <div class="col-2 text-right">
+        <a href="@Url.Action("Index", "Menu", new { Area = "" })" title="Back" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+
+@Html.RenderAlert("MenuMessage")
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="dd nestable" id="nestable">
+                            @Html.Raw(ViewBag.Menu)
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <form id="menu-add" class="p-3">
+                            <div class="form-body">
+                                <h3 class="f-20">Add menu item</h3>
+                                <div class="form-group row">
+                                    <label for="addInputName" class="col-3 control-label">Name</label>
+                                    <input type="text" class="col-9 form-control" id="addInputName" placeholder="Item name" required>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="addInputSlug" class="col-3 control-label">Slug</label>
+                                    <input type="text" class="col-9 form-control" id="addInputSlug" placeholder="item-slug" required>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <button id="addButton" class="btn btn-sm btn-info">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <form id="menu-editor" class="mt-2 p-3" style="display: none;">
+                            <div class="form-body">
+                                <h3 class="f-20">Edit menu item - <span id="currentEditName"></span></h3>
+                                <div class="form-group row">
+                                    <label for="addInputName" class="col-3 control-label">Name</label>
+                                    <input type="text" class="col-9 form-control" id="editInputName" placeholder="Item name" required>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="addInputSlug" class="col-3 control-label">Slug</label>
+                                    <input type="text" class="col-9 form-control" id="editInputSlug" placeholder="item-slug" required>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                        <button id="editButton" class="btn btn-sm btn-warning">Edit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <form method="post">
+                    <div class="form-body mt-4">
+                        <div class="form-group row">
+                            <label asp-for="Name" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Status" class="col-3 control-label"></label>
+                            <div class="col-4">
+                                <select asp-for="Status" class="form-control">
+                                    <option value="true">Active</option>
+                                    <option value="false">InActive</option>
+                                </select>
+                                <span asp-validation-for="Status"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row" style="display:none">
+                            <div class="col-12">
+                                <h2 class="text-center">Output:</h2>
+                                <textarea class="form-control" asp-for="Item"></textarea>
+                                <textarea class="form-control" id="json-output" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-actions form-actions-new">
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="submit" id="submitButton" class="btn btn-primary" value="Submit">Submit</button>
+                                    <a href="@Url.Action("Index", "Menu", new { Area = "" })" title="Back" class="btn btn-danger ml-2">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/Nestable-master/jquery.nestable.js"></script>
+    <script src="~/lib/Nestable-master/jquery.nestablePlus.js"></script>
+    <script>
+        $('#nestable').nestable({
+            maxDepth: 5
+        }).on('change', updateOutput);
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#submitButton").click(function () {
+                $("#Item").val($("#json-output").val());
+
+                var json = JSON.parse($("#json-output").val());
+                for (i = 0; i < json.length; i++) {
+                    if (json[i]["deleted"] == 1) {
+                        delete json[i];
+                    }
+                }
+
+                $("#Item").val(JSON.stringify(json).replace(/,null/g, ""))
+            });
+        });
+    </script>
+}

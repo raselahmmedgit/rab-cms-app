@@ -1,0 +1,64 @@
+﻿@model SiteInfoViewModel
+@if (Model != null)
+{
+    var host = $"{Context.Request.Scheme}://{Context.Request.Host}";
+    var imgRootPath = $"{host}/upload/logo/favicon-192x192.png";
+
+    string pageTitle = Model.SiteTitle;
+    if (ViewData["Title"] != null)
+    {
+        pageTitle = ViewData["Title"] + " - " + Model.SiteTitle;
+    }
+    string pageKeywords = Model.SiteKeywords;
+    if (ViewData["Keywords"] != null)
+    {
+        pageKeywords = ViewData["Keywords"].ToString();
+    }
+    string pageDescription = Model.SiteDescription;
+    if (ViewData["Description"] != null)
+    {
+        pageDescription = ViewData["Description"].ToString();
+    }
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <link rel="canonical" href="@Model.SiteCanonicalUrl" />
+    <link rel='shortlink' href='@Model.SiteShortlinkUrl' />
+    <meta name="keywords" content="@pageKeywords" />
+    <meta name="description" content="@pageDescription" />
+    <meta name="author" content="@Model.SiteAuthor" />
+    <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+    <meta name="google-site-verification" content="@Model.SiteGoogleSiteVerification" />
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@Model.SiteTitle" />
+    <meta property="og:description" content="@pageDescription" />
+    <meta property="og:url" content="@(host + Context.Request.Path)" />
+    <meta property="og:image" content="@pageDescription" />
+    <meta property="og:site_name" content="@Model.SiteName">
+    <meta property="og:updated_time" content="@DateTime.UtcNow">
+    <title>@pageTitle</title>
+    <!-- favicon icon -->
+    <link rel="icon" href="~/@Model.SiteFavicon32X32Url" sizes="32x32" />
+    <link rel="icon" href="~/@Model.SiteFavicon192x192Url" sizes="192x192" />
+    <link rel="apple-touch-icon" href="~/@Model.SiteFavicon180x180Url" />
+    <link rel="shortcut icon" href="~/@Model.SiteFavicon32X32Url" type="image/ico" />
+}
+else
+{
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <meta name="keywords" content="City Glass Company" />
+    <meta name="description" content="City Glass Company" />
+    <meta name="author" content="https://www.cityglasscompany.net/" />
+    <title>@ViewData["Title"] - Placovu CMS</title>
+    <!-- favicon icon -->
+    <link rel="icon" href="~/default/images/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" href="~/default/images/favicon-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="~/default/images/favicon-180x180.png" />
+    <link rel="shortcut icon" href="~/default/images/favicon-32x32.png" type="image/ico" />
+}

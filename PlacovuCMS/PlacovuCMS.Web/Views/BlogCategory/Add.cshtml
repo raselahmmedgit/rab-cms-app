@@ -1,0 +1,83 @@
+﻿@model BlogCategoryViewModel
+@{
+    ViewData["Title"] = @ViewBag.Title;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row mb-4">
+    <div class="col-10">
+        <h1 class="f-26">@ViewBag.Title</h1>
+    </div>
+    <div class="col-2 text-right">
+        <a href="@Url.Action("Index", "BlogCategory", new { Area = "" })" title="Back" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+
+@Html.RenderAlert("BlogCategoryMessage")
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post">
+                    <div class="form-body">
+                        <div class="form-group row">
+                            <label asp-for="Name" class="col-3 control-label"></label>
+                            <input asp-for="Name" class="col-4 form-control" required />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-3 control-label"><label asp-for="Url"></label></div>
+                            <input asp-for="Url" class="col-4 form-control" required />
+                            <div class="col-5">
+                                <p class="text-muted">example: @Context.Request.Scheme://@Context.Request.Host/sample</p>
+                            </div>
+
+                            <span asp-validation-for="Url" class="text-danger"></span>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="ParentId" class="col-3 control-label"></label>
+                            <select class="col-4 form-control" asp-for="ParentId" asp-items="ViewBag.CategoryList">
+                                <option selected value="0">Select</option>
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Description" class="col-3 control-label"></label>
+                            <input asp-for="Description" class="col-4 form-control" required />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="MetaTitle" class="col-3 control-label"></label>
+                            <input asp-for="MetaTitle" class="col-4 form-control" />
+                            <span asp-validation-for="MetaTitle" class="text-danger"></span>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="MetaKeyword" class="col-3 control-label"></label>
+                            <input asp-for="MetaKeyword" class="col-4 form-control" />
+                            <span asp-validation-for="MetaKeyword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="MetaDescription" class="col-3 control-label"></label>
+                            <input asp-for="MetaDescription" class="col-4 form-control" />
+                            <span asp-validation-for="MetaDescription" class="text-danger"></span>
+                        </div>
+                        <div class="form-group row">
+                            <label asp-for="Status" class="col-3 control-label"></label>
+                            <select class="col-4 form-control" asp-for="Status" required>
+                                <option value="true">Active</option>
+                                <option value="false">InActive</option>
+                            </select>
+                        </div>
+                        <div class="form-actions form-actions-new">
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="submit" class="btn btn-primary" value="Submit" />
+                                    <a href="@Url.Action("Index", "BlogCategory", new { Area = "" })" title="Back" class="btn btn-danger ml-2">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

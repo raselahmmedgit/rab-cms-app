@@ -1,0 +1,65 @@
+[
+  {
+    "outputFileName": "wwwroot/site/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/default/css/app.css",
+      "wwwroot/site/css/site.css"
+    ],
+    "minify": {
+      "enabled": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/site/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/site/js/site.js"
+    ],
+    "minify": {
+      "enabled": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/admin/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/default/css/app.css",
+      "wwwroot/admin/css/admin.css"
+    ],
+    "minify": {
+      "enabled": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/default/css/login.min.css",
+    "inputFiles": [
+      "wwwroot/default/css/login.css"
+    ],
+    "minify": {
+      "enabled": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/admin/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/default/js/app.js",
+      "wwwroot/default/js/app-modal.js"
+    ],
+    "minify": {
+      "enabled": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/default/js/login.min.js",
+    "inputFiles": [
+      "wwwroot/default/js/login.js"
+    ],
+    "minify": {
+      "enabled": true
+    },
+    "sourceMap": false
+  }
+]

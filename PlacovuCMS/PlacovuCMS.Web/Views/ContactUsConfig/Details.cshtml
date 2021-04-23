@@ -1,0 +1,90 @@
+﻿@model ContactUsConfigViewModel
+@{
+    ViewData["Title"] = "Contact Us Config Detail";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row mb-4">
+    <div class="col-10">
+        <h1 class="f-26">Contact Us Config Detail</h1>
+    </div>
+    <div class="col-2 text-right">
+        <a href="@Url.Action("Index", "ContactUsConfig", new { Area = "" })" title="Back" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+
+@Html.RenderAlert("ContactUsConfig")
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="javascript.void(0);" class="form form-horizontal">
+
+                    <div class="form-body">
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.ContactUsConfigType, new { @class = "col-4 control-label" })
+                            <div class="col-8">
+                                @Html.DisplayFor(model => model.ContactUsConfigType)
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.ToEmailAddress, new { @class = "col-4 control-label" })
+                            <div class="col-8">
+                                @Html.DisplayFor(model => model.ToEmailAddress)
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.FromEmailAddress, new { @class = "col-4 control-label" })
+                            <div class="col-8">
+                                @Html.DisplayFor(model => model.FromEmailAddress)
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.FromEmailAddressDisplayName, new { @class = "col-4 control-label" })
+                            <div class="col-8">
+                                @Html.DisplayFor(model => model.FromEmailAddressDisplayName)
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.PhoneNumber, new { @class = "col-4 control-label" })
+                            <div class="col-8">
+                                @Html.DisplayFor(model => model.PhoneNumber)
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.PhoneNumberDisplayName, new { @class = "col-4 control-label" })
+                            <div class="col-8">
+                                @Html.DisplayFor(model => model.PhoneNumberDisplayName)
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.DisplayOrder, new { @class = "col-4 control-label" })
+                            <div class="col-8">
+                                @Html.DisplayFor(model => model.DisplayOrder)
+                            </div>
+                        </div>
+
+                        <div class="form-actions form-actions-new">
+                            <div class="row">
+                                <div class="col-12">
+                                    <a href="@Url.Action("Index", "ContactUsConfig", new { Area = "" })" title="Back" class="btn btn-danger">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
